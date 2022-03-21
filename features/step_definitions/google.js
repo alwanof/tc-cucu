@@ -1,8 +1,22 @@
 const {Given, When, Then} = require('cucumber');
 const Selector = require('testcafe').Selector;
+function select(selector){
+    return Selector(selector).with({boundTestRun:testController})
+}
+Given('I open the login page', async function() {
+    await testController.navigateTo('https://ads-dev.admixplay.com/login');   
+   
+});
+When('I am typing {string} request {string} and click login button', async function(email,password) {
 
-Given('I am open Google\'s search page', async function() {
-    await testController.navigateTo('https://google.com');
+   await testController.typeText(select('#email'),email);
+   await testController.typeText(select('#password'),password);
+   await testController.click(select("button[type='submit']"));
+  
+ 
+});
+Then('I should see dashboard', async function() {
+   await testController.expect(select('h1.title').exists).ok();
 });
 
 When('I am typing my search request {string} on Google', async function(text) {

@@ -1,16 +1,9 @@
-Feature: Searching for TestCafe by Google
+Feature: auth section
 
-  I want to find TestCafe repository by Google search
-
-  Scenario: Searching for TestCafe by Google
-    Given I am open Google's search page
-    When I am typing my search request "github TestCafe" on Google
-    Then I press the "enter" key on Google
-    Then I should see that the first Google's result is "GitHub - DevExpress/testcafe:"
-
-
-  Scenario: Failing scenario
-    Given I am open Google's search page
-    When I am typing my search request "github TestCafe" on Google
-    Then I press the "enter" key on Google
-    Then I should see that the first Google's result is "kittens"
+  Scenario Outline: As a  user I can login successfully
+    Given I open the login page
+    When I am typing "<email>" request "<password>" and click login button
+    Then I should see dashboard
+    Examples:
+      | title        | email                        | password  |
+      | Authorized-1 | mohammed.murad@admixplay.com | Zoom+9321 |
