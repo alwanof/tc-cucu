@@ -1,0 +1,13 @@
+ame: Basic TestCafe Workflow
+on: [push]
+
+jobs:
+  build:
+    name: Run TestCafe Tests
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install TestCafe from 'npm' and Run Tests
+        uses: DevExpress/testcafe-action@latest
+        with:
+          args: "./node_modules/.bin/cucumber-js"
