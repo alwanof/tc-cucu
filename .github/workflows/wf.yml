@@ -1,6 +1,5 @@
 name: QA Deploy
-on:
-  workflow_dispatch:
+on: [push]
 jobs:
   build:
     name: Run Auto Test
