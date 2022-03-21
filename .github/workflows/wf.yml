@@ -1,13 +1,20 @@
-name: Basic TestCafe Workflow
-on: [push]
-
+name: QA Deploy
+on:
+  workflow_dispatch:
 jobs:
   build:
-    name: Run TestCafe Tests
-    runs-on: windows-latest
+    name: Run Auto Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
-      - uses: actions/checkout@v1
-      - name: Install TestCafe from 'npm' and Run Tests
-        uses: DevExpress/testcafe-action@latest
-        with:
-          args: "./node_modules/.bin/cucumber-js"
+    - uses: actions/checkout@v2
+    - name: Build Auto Test
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm test
