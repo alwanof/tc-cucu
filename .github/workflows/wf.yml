@@ -1,4 +1,4 @@
-ame: Basic TestCafe Workflow
+name: Basic TestCafe Workflow
 on: [push]
 
 jobs:
